@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# Create a temporary file to track decommitted files
+temp_file=$(mktemp)
+
+# Function to decommit files with issues
+decommit_bad_files() {
+    while IFS=, read -r filename rest; do
+        # Skip CSV header line
+        [ "$filename" = "filename" ] && continue
+        # Check if the file has already been decommitted
+        if ! grep -q "$filename" "$temp_file"; then
+            # Decommit the file with issues
+            git reset HEAD "$filename"
+            echo "Decomitting file with issues: $filename"
+            # Mark the file as decommitted
+            echo "$filename" >> "$temp_file"
+        fi
+    done
+}
+
+# Redirect output to a file
+OUTPUT_FILE="$(pwd)/bandit_report.csv"
+
+# Run Bandit on all Python files staged for commit and save the report in CSV format
+bandit -r --format csv --output "$OUTPUT_FILE" $(git diff --cached --name-only --diff-filter=d | grep '\.py$')
+
+# Capture Bandit's exit code
+BANDIT_EXIT_CODE=$?
+
+# Check if Bandit found any issues
+if [ "$BANDIT_EXIT_CODE" -eq 0 ]; then
+    echo "No security issues found."
+    rm "$temp_file"
+    exit 0
+else
+    echo "Security issues were detected and reported in $OUTPUT_FILE"
+    # Decommit files with issues
+    tail -n +2 "$OUTPUT_FILE" | decommit_bad_files
+    # Check if there are any remaining files staged for commit
+    if [ -z "$(git diff --cached --name-only --diff-filter=d | grep '\.py$')" ]; then
+        echo "All Python files with issues have been decommitted. No files left to commit."
+        rm "$temp_file"
+        exit 1
+    else
+        echo "Some Python files were decommitted due to issues. Committing the remaining good files."
+        rm "$temp_file"
+        exit 0
+    fi
+fi
+
