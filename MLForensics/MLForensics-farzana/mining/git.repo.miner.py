@@ -17,12 +17,14 @@ from xml.parsers.expat import ExpatError
 import time 
 import  datetime 
 import os 
+from .. import MyLogger
 
 def deleteRepo(dirName, type_):
     print(':::' + type_ + ':::Deleting ', dirName)
     try:
         if os.path.exists(dirName):
             shutil.rmtree(dirName)
+            logObj.info(f"logging the removal of Repo: {dirName}")
     except OSError:
         print('Failed deleting, will try manually')        
 
@@ -119,17 +121,17 @@ def deleteRepos():
     repos    = np.unique( repos_df['REPO'].tolist() ) 
     for x_ in repos:
         deleteRepo( x_, 'ML_LIBRARY_THRESHOLD' )
+    logObj.info("logging use of deleteRepos() in git.repo.miner.py")
 
 if __name__=='__main__':
+    logObj = MyLogger.giveMeLoggingObject()
     # repos_df = pd.read_csv('PARTIAL_REMAINING_GITHUB.csv')
     # list_    = repos_df['URL'].tolist()
     # list_    = np.unique(list_)
-    # # print('Repos to download:', len(list_)) 
-    # ## need to create chunks as too many repos 
-    # chunked_list = list(makeChunks(list_, 100))  ### list of lists, at each batch download 100 repos 
+    # # print('Repos to download:', len(list_))
+    # ## need to create chunks as too many repos
+    # chunked_list = list(makeChunks(list_, 100))  ### list of lists, at each batch download 100 repos
     # cloneRepos(chunked_list)
-
-
 
     '''
     some utils  
@@ -141,5 +143,3 @@ if __name__=='__main__':
     df_ = pd.DataFrame( ls_ )
     df_.to_csv('LIB_BREAKDOWN_GITHUB_BATCH2.csv', header=['REPO', 'LIB_COUNT'] , index=False, encoding='utf-8')              
     '''
-
-
