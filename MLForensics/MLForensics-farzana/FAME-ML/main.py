@@ -12,9 +12,8 @@ import os
 import pandas as pd
 import py_parser 
 import numpy as np 
-import sys
 import os.path
-from .. import MyLogger
+import MyLogger
 
 def giveTimeStamp():
   tsObj = time.time()
@@ -164,8 +163,8 @@ def runFameML(inp_dir, csv_fil):
 		print(constants.ANALYZING_KW, subfolder)
 		print('-'*50)
 	full_df = pd.DataFrame( df_list ) 
-	
-   	logObj.info("Simple application started.")
+	logObj = myLogger.giveMeLoggingObject()
+	logObj.info("Simple application started.")
 	# print(full_df.head())
 	full_df.to_csv(csv_fil, header= constants.CSV_HEADER, index=False, encoding= constants.UTF_ENCODING)     
 	return output_event_dict
