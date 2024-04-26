@@ -16,14 +16,11 @@ import os.path
 import MyLogger
 
 
-logObj = MyLogger.giveMeLoggingObject()
-logObj.info("Application started.")
-
 def giveTimeStamp():
   tsObj = time.time()
   strToret = datetime.datetime.fromtimestamp(tsObj).strftime(constants.TIME_FORMAT) 
   return strToret
-  
+
 
 def getCSVData(dic_, dir_repo):
 	temp_list = []
@@ -140,8 +137,8 @@ def getCSVData(dic_, dir_repo):
 		temp_list.append( the_tup )
 		# print('='*25)
 	return temp_list
-  
-  
+
+
 def getAllPythonFilesinRepo(path2dir):
 	valid_list = []
 	for root_, dirnames, filenames in os.walk(path2dir):
@@ -163,11 +160,12 @@ def runFameML(inp_dir, csv_fil):
 		if subfolder not in output_event_dict:
 			output_event_dict[subfolder] = events_with_dic
 		temp_list  = getCSVData(events_with_dic, subfolder)
+		logObj.info(f"getCSVData logged because data could be poisoned: {temp_list}")
 		df_list    = df_list + temp_list 
 		print(constants.ANALYZING_KW, subfolder)
 		print('-'*50)
 	full_df = pd.DataFrame( df_list ) 
-	logObj = myLogger.giveMeLoggingObject()
+ 	#logging
 	logObj.info(f'\tTest Dataframe Output Below:')
 	logObj.info(f'\n\t\t{full_df}')
 	logObj.info(f'{full_df}')
@@ -177,44 +175,48 @@ def runFameML(inp_dir, csv_fil):
 
 
 if __name__=='__main__':
-	command_line_flag = False ## after acceptance   
-	logObj  = myLogger.giveMeLoggingObject()
-	t1 = time.time()
-	print('Started at:', giveTimeStamp() )
-	print('*'*100 )
+    command_line_flag = False  ## after acceptance
+    logObj = MyLogger.giveMeLoggingObject()
+    logObj.info("Application started.")
+    t1 = time.time()
+    print("Started at:", giveTimeStamp())
+    print("*" * 100)
 
-	if command_line_flag:
-		dir_path = input(constants.ASK_INPUT_FROM_USER)   
-		dir_path = dir_path.strip() 
-		if(os.path.exists( dir_path ) ):
-			repo_dir    = dir_path 
-			output_file = dir_path.split('/')[-2]
-			output_csv = '/Users/arahman/Documents/OneDriveWingUp/OneDrive-TennesseeTechUniversity/Research/VulnStrategyMining/ForensicsinML/Output/V5_' + output_file + '.csv'
-			full_dict  = runFameML(repo_dir, output_csv)
-	else: 
-		repo_dir   = '/Users/arahman/FSE2021_ML_REPOS/GITHUB_REPOS/'
-		output_csv = '/Users/arahman/Documents/OneDriveWingUp/OneDrive-TennesseeTechUniversity/Research/VulnStrategyMining/ForensicsinML/Output/V5_OUTPUT_GITHUB.csv'
-		full_dict  = runFameML(repo_dir, output_csv)
+    if command_line_flag:
+        dir_path = input(constants.ASK_INPUT_FROM_USER)
+        logObj.info(f"logging input from user: {dir_path}")
+        dir_path = dir_path.strip()
+        if os.path.exists(dir_path):
+            repo_dir = dir_path
+            output_file = dir_path.split("/")[-2]
+            output_csv = (
+                "/Users/arahman/Documents/OneDriveWingUp/OneDrive-TennesseeTechUniversity/Research/VulnStrategyMining/ForensicsinML/Output/V5_"
+                + output_file
+                + ".csv"
+            )
+            full_dict = runFameML(repo_dir, output_csv)
+    else:
+        repo_dir = "/Users/arahman/FSE2021_ML_REPOS/GITHUB_REPOS/"
+        output_csv = "/Users/arahman/Documents/OneDriveWingUp/OneDrive-TennesseeTechUniversity/Research/VulnStrategyMining/ForensicsinML/Output/V5_OUTPUT_GITHUB.csv"
+        full_dict = runFameML(repo_dir, output_csv)
 
-		# repo_dir   = '/Users/arahman/FSE2021_ML_REPOS/GITLAB_REPOS/'
-		# output_csv = '/Users/arahman/Documents/OneDriveWingUp/OneDrive-TennesseeTechUniversity/Research/VulnStrategyMining/ForensicsinML/Output/V5_OUTPUT_GITLAB.csv'
-		# full_dict  = runFameML(repo_dir, output_csv)
+        # repo_dir   = '/Users/arahman/FSE2021_ML_REPOS/GITLAB_REPOS/'
+        # output_csv = '/Users/arahman/Documents/OneDriveWingUp/OneDrive-TennesseeTechUniversity/Research/VulnStrategyMining/ForensicsinML/Output/V5_OUTPUT_GITLAB.csv'
+        # full_dict  = runFameML(repo_dir, output_csv)
 
-		# repo_dir   = '/Users/arahman/FSE2021_ML_REPOS/MODELZOO/'
-		# output_csv = '/Users/arahman/Documents/OneDriveWingUp/OneDrive-TennesseeTechUniversity/Research/VulnStrategyMining/ForensicsinML/Output/V5_OUTPUT_MODELZOO.csv'
-		# full_dict  = runFameML(repo_dir, output_csv)
-		
-		# repo_dir   = '/Users/arahman/FSE2021_ML_REPOS/TEST/'
-		# output_csv = '/Users/arahman/Documents/OneDriveWingUp/OneDrive-TennesseeTechUniversity/Research/VulnStrategyMining/ForensicsinML/Output/V5_OUTPUT_TEST.csv'
-		# full_dict = runFameML(repo_dir, output_csv)
+        # repo_dir   = '/Users/arahman/FSE2021_ML_REPOS/MODELZOO/'
+        # output_csv = '/Users/arahman/Documents/OneDriveWingUp/OneDrive-TennesseeTechUniversity/Research/VulnStrategyMining/ForensicsinML/Output/V5_OUTPUT_MODELZOO.csv'
+        # full_dict  = runFameML(repo_dir, output_csv)
 
-	print('*'*100 )
-	print('Ended at:', giveTimeStamp() )
-	print('*'*100 )
-	
-	t2 = time.time()
-	time_diff = round( (t2 - t1 ) / 60, 5) 
-	print('Duration: {} minutes'.format(time_diff) )
-	print('*'*100 )
+        # repo_dir   = '/Users/arahman/FSE2021_ML_REPOS/TEST/'
+        # output_csv = '/Users/arahman/Documents/OneDriveWingUp/OneDrive-TennesseeTechUniversity/Research/VulnStrategyMining/ForensicsinML/Output/V5_OUTPUT_TEST.csv'
+        # full_dict = runFameML(repo_dir, output_csv)
 
+    print("*" * 100)
+    print("Ended at:", giveTimeStamp())
+    print("*" * 100)
 
+    t2 = time.time()
+    time_diff = round((t2 - t1) / 60, 5)
+    print("Duration: {} minutes".format(time_diff))
+    print("*" * 100)
