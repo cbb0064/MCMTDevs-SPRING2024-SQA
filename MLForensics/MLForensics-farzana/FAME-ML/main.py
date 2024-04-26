@@ -15,6 +15,10 @@ import numpy as np
 import os.path
 import MyLogger
 
+
+logObj = myLogger.giveMeLoggingObject()
+logObj.info("Application started.")
+
 def giveTimeStamp():
   tsObj = time.time()
   strToret = datetime.datetime.fromtimestamp(tsObj).strftime(constants.TIME_FORMAT) 
@@ -164,7 +168,9 @@ def runFameML(inp_dir, csv_fil):
 		print('-'*50)
 	full_df = pd.DataFrame( df_list ) 
 	logObj = myLogger.giveMeLoggingObject()
-	logObj.info("Simple application started.")
+	logObj.info(f'\tTest Dataframe Output Below:')
+	logObj.info(f'\n\t\t{full_df}')
+	logObj.info(f'{full_df}')
 	# print(full_df.head())
 	full_df.to_csv(csv_fil, header= constants.CSV_HEADER, index=False, encoding= constants.UTF_ENCODING)     
 	return output_event_dict
