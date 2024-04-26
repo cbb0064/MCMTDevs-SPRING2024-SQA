@@ -17,7 +17,7 @@ from xml.parsers.expat import ExpatError
 import time 
 import  datetime 
 import os 
-from .. import MyLogger
+import MyLogger
 
 def deleteRepo(dirName, type_):
     print(':::' + type_ + ':::Deleting ', dirName)

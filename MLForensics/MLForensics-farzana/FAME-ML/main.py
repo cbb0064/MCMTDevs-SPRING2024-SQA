@@ -13,7 +13,7 @@ import pandas as pd
 import py_parser 
 import numpy as np 
 import os.path
-from .. import MyLogger
+import MyLogger
 
 
 def giveTimeStamp():
