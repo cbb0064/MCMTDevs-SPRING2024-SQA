@@ -16,7 +16,7 @@ import os.path
 import MyLogger
 
 
-logObj = myLogger.giveMeLoggingObject()
+logObj = MyLogger.giveMeLoggingObject()
 logObj.info("Application started.")
 
 def giveTimeStamp():
