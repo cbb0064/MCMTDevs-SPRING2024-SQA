@@ -19,3 +19,6 @@ Sample Text
 ### Continuous Integration
 
 Sample Text
+
+![image](/images/CI_1.jpg?raw=true "CI 1")
+![image](/images/CI_2.jpg?raw=true "CI 2")
