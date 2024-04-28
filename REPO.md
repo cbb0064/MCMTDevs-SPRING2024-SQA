@@ -6,7 +6,7 @@ The purpose of this project is to integrate SQA activities into a provided zip f
 
 ## Git Hooks
 
-Sample Text
+Added A security hook that checked for security issues with python files staged for commit. 
 
 ## Fuzzing
 
