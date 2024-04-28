@@ -6,7 +6,7 @@ The purpose of this project is to integrate SQA activities into a provided zip f
 
 ## Git Hooks
 
-Sample Text
+The pre-commit git hook is a security measure designed to precheck any python files staged for commit that might have any security issues. The static analysis method used i nthis case was bandit, and the script was written to also handle cases in which there were both good and bad files staged simultaneously. 
 
 ## Fuzzing
 
