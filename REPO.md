@@ -13,10 +13,10 @@ Sample Text
 Fuzzing is a testing method where software is bombarded with diverse and often unexpected inputs to uncover bugs or vulnerabilities. Fuzz Image 1 shows how the program responds to various inputs, while Fuzz Image 2 displays the list of inputs used for testing. By examining how the program handles these inputs, developers can identify potential issues such as crashes or security flaws. Automated tools are often employed to streamline this process.
 
 ### Fuzz Image 1
-![image](/images/FUZZ_1.PNG?raw=true "Fuzz 1")
+![image](/images/FUZZ_1.png?raw=true "Fuzz 1")
 
 ### Fuzz Image 2
-![image](/images/FUZZ_2.PNG?raw=true "Fuzz 2")
+![image](/images/FUZZ_2.png?raw=true "Fuzz 2")
 
 ## Forensics
 
