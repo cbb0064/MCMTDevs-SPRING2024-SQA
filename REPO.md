@@ -20,5 +20,5 @@ Sample Text
 
 Sample Text
 
-![image](/images/CI_1.jpg?raw=true "CI 1")
-![image](/images/CI_2.jpg?raw=true "CI 2")
+![image](/images/CI_1.JPG?raw=true "CI 1")
+![image](/images/CI_2.JPG?raw=true "CI 2")
