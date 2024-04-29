@@ -26,7 +26,20 @@ Fuzzing is a testing method where software is bombarded with diverse and often u
 
 ## Forensics
 
-Sameple Text
+Logging is the process of recording events and messages during the execution of a program or system. It helps developers debug issues, monitor performance, and track user activities. The logs that I implemented are stored in a file called SIMPLE-LOGGER.log in the directory that the logging occurred.
+
+Added Logging to 5 methods:
+
+FAME-ML/main.py
+- runFameML()
+- getAllPythonFilesinRepo()
+- getCSVData()
+
+mining/git.repo.miner.py
+- deleteRepo()
+- deleteRepos()
+
+
 
 ## Continuous Integration
 
