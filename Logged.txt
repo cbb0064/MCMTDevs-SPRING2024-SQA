@@ -1,0 +1,11 @@
+Added Logging to 5 methods:
+
+FAME-ML/main.py
+- runFameML()
+- getAllPythonFilesinRepo()
+-getCSVData()
+
+
+mining/git.repo.miner.py
+- deleteRepo()
+- deleteRepos()
