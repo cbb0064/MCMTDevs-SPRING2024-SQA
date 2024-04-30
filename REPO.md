@@ -39,7 +39,17 @@ mining/git.repo.miner.py
 - deleteRepo()
 - deleteRepos()
 
+### Forensic Image 1
+![image](/images/Shot1.png?raw=true "Shot 1")
 
+### Forensic Image 2
+![image](/images/Shot2.png?raw=true "Shot 2")
+
+### Forensic Image 3
+![image](/images/Shot3.png?raw=true "Shot 3")
+
+### Forensic Image 4
+![image](/images/Shot4.png?raw=true "Shot 4")
 
 ## Continuous Integration
 
