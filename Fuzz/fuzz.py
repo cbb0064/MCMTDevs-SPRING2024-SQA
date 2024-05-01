@@ -11,7 +11,7 @@ from method4 import divide as method4
 from method5 import concatenate_strings as method5
 
 # Load the input data from blns.json
-with open('blns.json', 'r') as f:
+with open('Fuzz/blns.json', 'r') as f:
     input_data = json.load(f)
 
 # List of methods to fuzz
